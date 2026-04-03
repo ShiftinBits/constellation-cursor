@@ -56,9 +56,10 @@ Cursor: "Before renaming, let me analyze the potential impact..."
 
 Event hooks fire at key lifecycle moments:
 
-| Hook | Event | Behavior |
-|------|-------|----------|
-| **session-start** | `sessionStart` | Injects code_intel awareness into every new session |
+| Hook | Event | Type | Behavior |
+|------|-------|------|----------|
+| **session-start** | `sessionStart` | Command | Injects code_intel awareness into every new session |
+| **prefer-code-intel** | `preToolUse` | Prompt | LLM-evaluates Grep/Glob calls and nudges toward code_intel for structural queries |
 
 ### Rules
 
@@ -66,7 +67,6 @@ Persistent guidance that enhances every interaction:
 
 | Rule | Behavior |
 |------|----------|
-| **prefer-code-intel** | Nudges toward structural analysis when Grep/Glob is about to be used |
 | **compact-preservation** | Preserves Constellation insights during context compaction |
 | **code-intelligence** | Enhances responses with dependency awareness and impact-conscious suggestions |
 

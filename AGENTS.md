@@ -12,13 +12,12 @@
 mcp.json                     MCP server config → @constellationdev/mcp (stdio)
 
 hooks/
-├── hooks.json               Hook definitions (sessionStart)
+├── hooks.json               Hook definitions (sessionStart + preToolUse prompt hook)
 ├── session-start.sh         Injects code_intel awareness at session start
 └── prompts/
     └── session-start.txt    Prompt text for session start hook
 
-rules/                       3 rules (.mdc files)
-├── prefer-code-intel.mdc    Nudge away from Grep/Glob for structural queries (agent-decides)
+rules/                       2 rules (.mdc files)
 ├── compact-preservation.mdc Preserve insights during compaction (alwaysApply)
 └── code-intelligence.mdc    Response formatting with structural analysis (alwaysApply)
 
@@ -46,7 +45,7 @@ skills/                      7 skills (6 command-replacements + 1 troubleshootin
 
 **Single MCP tool** — All API calls flow through `mcp_constellation_code_intel`. Skills and agents write JavaScript code blocks using an injected `api` object.
 
-**Hooks + rules** — A `sessionStart` hook injects code_intel awareness into every session. Rules (.mdc files) provide additional persistent guidance: `prefer-code-intel` nudges the agent away from Grep/Glob for structural queries, `compact-preservation` ensures insights survive compaction, and `code-intelligence` shapes response formatting.
+**Hooks + rules** — A `sessionStart` command hook injects code_intel awareness into every session. A `preToolUse` prompt hook (LLM-evaluated) intercepts Grep/Glob calls and nudges the agent toward code_intel for structural queries. Rules (.mdc files) provide additional persistent guidance: `compact-preservation` ensures insights survive compaction, and `code-intelligence` shapes response formatting.
 
 **Skills as commands** — All 6 analysis skills use `disable-model-invocation: true` to preserve explicit-only invocation behavior via `/constellation:<name>` slash commands.
 
