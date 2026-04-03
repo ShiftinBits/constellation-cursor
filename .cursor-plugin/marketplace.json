@@ -1,0 +1,19 @@
+{
+	"name": "constellation-plugins",
+	"owner": {
+		"name": "ShiftinBits Inc",
+		"email": "hello@shiftinbits.com"
+	},
+	"plugins": [
+		{
+			"name": "constellation",
+			"description": "Supercharges Cursor with Constellation, a privacy-first code intelligence platform for deeper codebase understanding and shared code context across teams.",
+			"source": "./",
+			"version": "1.0.0",
+			"license": "AGPL-3.0",
+			"repository": "https://github.com/ShiftinBits/constellation-cursor",
+			"category": "development",
+			"homepage": "https://constellationdev.io"
+		}
+	]
+}

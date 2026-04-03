@@ -1,0 +1,24 @@
+{
+	"name": "constellation",
+	"version": "1.0.0",
+	"description": "Supercharges Cursor with Constellation, a privacy-first code intelligence platform for deeper codebase understanding and team knowledge sharing.",
+	"author": {
+		"name": "ShiftinBits Inc"
+	},
+	"homepage": "https://constellationdev.io",
+	"repository": "https://github.com/ShiftinBits/constellation-cursor",
+	"license": "AGPL-3.0",
+	"logo": "./assets/logo.png",
+	"keywords": [
+		"code-intelligence",
+		"code-analysis",
+		"dependency-analysis",
+		"impact-analysis",
+		"code-metadata",
+		"code-graph",
+		"mcp",
+		"constellation",
+		"shiftinbits"
+	],
+	"mcpServers": "./mcp.json"
+}
