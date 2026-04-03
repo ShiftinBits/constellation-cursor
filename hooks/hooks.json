@@ -1,18 +1,25 @@
 {
-  "version": 1,
-  "hooks": {
-    "sessionStart": [
-      {
-        "command": "./hooks/session-start.sh"
-      }
-    ],
-    "preToolUse": [
-      {
-        "type": "prompt",
-        "prompt": "The user has access to Constellation's mcp_constellation_code_intel MCP tool for structural code questions — symbol definitions, callers/callees, dependencies, dependents, impact analysis, architecture overview. It answers in one call what would take 3-5 text searches. Is this Grep or Glob call being used for a structural code question that code_intel could answer better? If yes, return ok: false with a reason suggesting code_intel instead. If the search is for literal strings, config values, log messages, or code_intel is unavailable, return ok: true.",
-        "matcher": "Grep|Glob",
-        "timeout": 10
-      }
-    ]
-  }
+	"version": 1,
+	"hooks": {
+		"sessionStart": [
+			{
+				"command": "./hooks/session-start.sh"
+			}
+		],
+		"beforeMCPExecution": [
+			{
+				"command": "./hooks/allow-constellation-mcp.sh",
+				"matcher": "constellation",
+				"timeout": 5
+			}
+		],
+		"preToolUse": [
+			{
+				"type": "prompt",
+				"prompt": "The user has access to Constellation's mcp_constellation_code_intel MCP tool for structural code questions — symbol definitions, callers/callees, dependencies, dependents, impact analysis, architecture overview. It answers in one call what would take 3-5 text searches. Is this Grep or Glob call being used for a structural code question that code_intel could answer better? If yes, return ok: false with a reason suggesting code_intel instead. If the search is for literal strings, config values, log messages, or code_intel is unavailable, return ok: true.",
+				"matcher": "Grep|Glob",
+				"timeout": 10
+			}
+		]
+	}
 }
