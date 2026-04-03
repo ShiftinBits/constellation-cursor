@@ -1,7 +1,6 @@
 ---
 name: constellation:deps
 description: Analyze dependencies for a file or symbol
-disable-model-invocation: true
 ---
 
 **IMPORTANT: Do NOT invoke any skills or other commands. Directly call the MCP tool specified below.**

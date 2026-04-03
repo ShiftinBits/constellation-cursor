@@ -1,7 +1,6 @@
 ---
 name: constellation:unused
 description: Find orphaned/dead code that is exported but never imported
-disable-model-invocation: true
 ---
 
 **IMPORTANT: Do NOT invoke any skills or other commands. Directly call the MCP tool specified below.**

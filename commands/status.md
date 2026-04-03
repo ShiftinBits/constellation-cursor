@@ -1,7 +1,6 @@
 ---
 name: constellation:status
 description: Check Constellation API connectivity and authentication status
-disable-model-invocation: true
 ---
 
 **IMPORTANT: Do NOT invoke any skills or other commands. Directly call the MCP tool specified below.**

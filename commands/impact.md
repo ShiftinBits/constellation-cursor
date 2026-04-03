@@ -1,7 +1,6 @@
 ---
 name: constellation:impact
 description: Analyze the impact of changing a symbol or file
-disable-model-invocation: true
 ---
 
 **IMPORTANT: Do NOT invoke any skills or other commands. Directly call the MCP tool specified below.**

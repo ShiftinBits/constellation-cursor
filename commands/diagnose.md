@@ -1,7 +1,6 @@
 ---
 name: constellation:diagnose
 description: Quick health check for Constellation connectivity and authentication
-disable-model-invocation: true
 ---
 
 **IMPORTANT: Do NOT invoke any skills or other commands. Directly call the MCP tool specified below.**
