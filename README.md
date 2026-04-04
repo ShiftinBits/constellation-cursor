@@ -14,26 +14,26 @@ While Constellation's MCP server provides raw code intelligence capabilities, th
 
 ## Features
 
-### Skills (Slash Commands)
+### Slash commands
 
-Execute powerful analysis with simple slash commands:
+These workflows are defined as markdown in [`commands/`](commands/) (each file has `name` + `description` frontmatter). Invoke them with `/constellation:<name>`:
 
 | Command | Description |
 |---------|-------------|
-| `/constellation:status` | Check API connectivity and project indexing status |
-| `/constellation:diagnose` | Quick health check for connectivity and authentication |
+| `/constellation:status` | Check API connectivity and authentication (`api.ping`) |
+| `/constellation:diagnose` | Broader health check including project metrics (`api.getArchitectureOverview`) |
 | `/constellation:impact <symbol> <file>` | Analyze blast radius before changing a symbol |
 | `/constellation:deps <file> [--reverse]` | Map dependencies or find what depends on a file |
 | `/constellation:unused` | Discover orphaned exports and dead code |
 | `/constellation:architecture` | Get a high-level overview of your codebase structure |
 
-### Contextual Skills
+### Contextual skills
 
-Cursor automatically activates specialized knowledge based on your questions:
+These live under [`skills/`](skills/) as `SKILL.md` files. Cursor can load them automatically when your question matches the skill description (for example troubleshooting and error codes):
 
-| Skill | Triggers When You Ask About... |
-|-------|-------------------------------|
-| **constellation-troubleshooting** | Error codes, connectivity issues, debugging problems |
+| Skill | Triggers when you ask about… |
+|-------|------------------------------|
+| **constellation-troubleshooting** | Error codes, connectivity, MCP issues, indexing, failed commands |
 
 ### Agents
 
@@ -54,12 +54,13 @@ Cursor: "Before renaming, let me analyze the potential impact..."
 
 ### Hooks
 
-Event hooks fire at key lifecycle moments:
+Configured in [`hooks/hooks.json`](hooks/hooks.json). Cursor matches on the **event** name; there are no separate hook “ids” in the manifest beyond what each entry does:
 
-| Hook | Event | Type | Behavior |
-|------|-------|------|----------|
-| **session-start** | `sessionStart` | Command | Injects code_intel awareness into every new session |
-| **prefer-code-intel** | `preToolUse` | Prompt | LLM-evaluates Grep/Glob calls and nudges toward code_intel for structural queries |
+| Event | Type | Implementation | Behavior |
+|-------|------|----------------|----------|
+| `sessionStart` | Command | `./hooks/session-start.sh` | Injects code_intel awareness at the start of a session |
+| `beforeMCPExecution` | Command | `./hooks/allow-constellation-mcp.sh` (matcher: `constellation`) | Runs before Constellation MCP execution (short timeout) |
+| `preToolUse` | Prompt | Inline prompt in `hooks.json` (tool matcher: Grep and Glob) | LLM evaluates those tool calls and may suggest `code_intel` for structural queries instead |
 
 ### Rules
 
@@ -93,7 +94,7 @@ In Cursor:
 |-------|----------|
 | `AUTH_ERROR` | Check `CONSTELLATION_ACCESS_KEY` is set correctly, use `constellation auth` CLI command to set |
 | `PROJECT_NOT_INDEXED` | Run `constellation index --full` in your project |
-| Skills not appearing | Restart Cursor or check plugin path |
+| Commands or skills not appearing | Restart Cursor or verify the plugin is installed and paths resolve |
 
 ## Documentation
 

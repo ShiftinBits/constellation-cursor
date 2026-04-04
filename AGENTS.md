@@ -12,10 +12,19 @@
 mcp.json                     MCP server config → @constellationdev/mcp (stdio)
 
 hooks/
-├── hooks.json               Hook definitions (sessionStart + preToolUse prompt hook)
+├── hooks.json               Hook definitions (sessionStart, beforeMCPExecution, preToolUse)
 ├── session-start.sh         Injects code_intel awareness at session start
+├── allow-constellation-mcp.sh Runs before Constellation MCP execution (matcher: constellation)
 └── prompts/
     └── session-start.txt    Prompt text for session start hook
+
+commands/                    6 slash commands (/constellation:*)
+├── status.md
+├── diagnose.md
+├── impact.md
+├── deps.md
+├── unused.md
+└── architecture.md
 
 rules/                       2 rules (.mdc files)
 ├── compact-preservation.mdc Preserve insights during compaction (alwaysApply)
@@ -26,13 +35,7 @@ agents/                      3 autonomous agents
 ├── impact-investigator.md   Change risk assessment
 └── dependency-detective.md  Dependency health (readonly)
 
-skills/                      7 skills (6 command-replacements + 1 troubleshooting)
-├── status/SKILL.md          /constellation:status — API connectivity check
-├── diagnose/SKILL.md        /constellation:diagnose — Full health check
-├── impact/SKILL.md          /constellation:impact — Symbol change impact analysis
-├── deps/SKILL.md            /constellation:deps — File dependency analysis
-├── unused/SKILL.md          /constellation:unused — Dead code finder
-├── architecture/SKILL.md    /constellation:architecture — Codebase architecture overview
+skills/                      1 contextual skill (auto-triggered from description keywords)
 └── constellation-troubleshooting/
     ├── SKILL.md             Troubleshooting guide (keyword-triggered)
     └── references/
@@ -41,13 +44,13 @@ skills/                      7 skills (6 command-replacements + 1 troubleshootin
 
 ## Key Concepts
 
-**Pure declarative plugin** — No package.json, no build step, no tests. All components are Markdown files with YAML frontmatter. Validation is manual (invoke skills in Cursor).
+**Pure declarative plugin** — No package.json, no build step, no tests. Components are Markdown (plus `hooks.json` / `mcp.json`). Validation is manual (run slash commands and skills in Cursor).
 
-**Single MCP tool** — All API calls flow through `mcp_constellation_code_intel`. Skills and agents write JavaScript code blocks using an injected `api` object.
+**Single MCP tool** — All API calls flow through `mcp_constellation_code_intel`. Slash command specs in `commands/`, the troubleshooting skill, and agents use JavaScript snippets with an injected `api` object.
 
-**Hooks + rules** — A `sessionStart` command hook injects code_intel awareness into every session. A `preToolUse` prompt hook (LLM-evaluated) intercepts Grep/Glob calls and nudges the agent toward code_intel for structural queries. Rules (.mdc files) provide additional persistent guidance: `compact-preservation` ensures insights survive compaction, and `code-intelligence` shapes response formatting.
+**Hooks + rules** — `sessionStart` runs `session-start.sh` to inject code_intel awareness. `beforeMCPExecution` runs `allow-constellation-mcp.sh` for Constellation MCP calls. A `preToolUse` prompt hook (LLM-evaluated) matches Grep/Glob and may steer structural questions toward `code_intel`. Rules (.mdc files): `compact-preservation` preserves insights across compaction; `code-intelligence` shapes response formatting.
 
-**Skills as commands** — All 6 analysis skills use `disable-model-invocation: true` to preserve explicit-only invocation behavior via `/constellation:<name>` slash commands.
+**Slash commands vs skills** — The `/constellation:*` workflows are **commands**: one markdown file per command under `commands/` with `name` and `description` frontmatter. **Skills** under `skills/*/SKILL.md` are for contextual, description-driven loading (here: troubleshooting only). Add `disable-model-invocation: true` on a skill when it should be explicit-only.
 
 ## Component Patterns
 
@@ -66,7 +69,14 @@ alwaysApply: true
 - `alwaysApply: false` + `description` — Agent decides based on relevance
 - `globs` — Apply only when matching files are in context
 
-### Skills
+### Slash commands (`commands/`)
+
+YAML frontmatter fields: `name`, `description`
+
+- `name` — Use the slash id (e.g. `constellation:status`) so `/constellation:status` resolves.
+- Body — Instructions and `mcp_constellation_code_intel` / `api.*` snippets, same patterns as agents.
+
+### Skills (`skills/`)
 
 YAML frontmatter fields: `name`, `description`, `disable-model-invocation` (optional)
 
@@ -78,8 +88,8 @@ disable-model-invocation: true
 ---
 ```
 
-- `disable-model-invocation: true` — Explicit invocation only (for command replacements)
-- Without it — Agent auto-triggers based on description keyword matching
+- `disable-model-invocation: true` — Explicit invocation only
+- Without it — Agent may auto-trigger from description keyword matching
 
 ### Agents
 
@@ -105,13 +115,18 @@ readonly: true
 2. Add frontmatter: `description`, `alwaysApply` (true/false)
 3. Write the rule content in markdown
 
-### Adding a Skill
+### Adding a slash command
+
+1. Create `commands/<topic>.md`
+2. Add frontmatter: `name` (`constellation:<topic>`), `description`
+3. Document arguments and embed the `mcp_constellation_code_intel` / `api.*` code the model should run
+
+### Adding a skill
 
 1. Create `skills/<name>/SKILL.md`
 2. Add frontmatter: `name`, `description`
 3. Add `disable-model-invocation: true` if it should only be explicitly invoked
-4. Write the skill content including JavaScript code blocks using `api.*` methods
-5. Add reference docs in `skills/<name>/references/` if needed
+4. Write the skill body (and optional `api.*` examples) plus `skills/<name>/references/` if needed
 
 ### Adding an Agent
 
