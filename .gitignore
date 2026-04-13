@@ -1,3 +1,15 @@
+# Claude Code local settings
+.claude/settings.local.json
+.claude/plans
+.claude/worktrees
+.superpowers/
+docs/superpowers
+docs/plans
+docs/specs
+
+# Temp Folders
+temp/
+
 # Cursor local settings
 .cursor/
 
