@@ -18,7 +18,7 @@ hooks/
 └── prompts/
     └── session-start.txt    Prompt text for session start hook
 
-commands/                    6 slash commands (/constellation:*)
+commands/                    6 slash commands (/constellation-*)
 ├── status.md
 ├── diagnose.md
 ├── impact.md
@@ -50,7 +50,7 @@ skills/                      1 contextual skill (auto-triggered from description
 
 **Hooks + rules** — `sessionStart` runs `session-start.sh` to inject code_intel awareness. `beforeMCPExecution` runs `allow-constellation-mcp.sh` for Constellation MCP calls. A `preToolUse` prompt hook (LLM-evaluated) matches Grep/Glob and may steer structural questions toward `code_intel`. Rules (.mdc files): `compact-preservation` preserves insights across compaction; `code-intelligence` shapes response formatting.
 
-**Slash commands vs skills** — The `/constellation:*` workflows are **commands**: one markdown file per command under `commands/` with `name` and `description` frontmatter. **Skills** under `skills/*/SKILL.md` are for contextual, description-driven loading (here: troubleshooting only). Add `disable-model-invocation: true` on a skill when it should be explicit-only.
+**Slash commands vs skills** — The `/constellation-*` workflows are **commands**: one markdown file per command under `commands/` with `name` and `description` frontmatter. **Skills** under `skills/*/SKILL.md` are for contextual, description-driven loading (here: troubleshooting only). Add `disable-model-invocation: true` on a skill when it should be explicit-only.
 
 ## Component Patterns
 
@@ -73,7 +73,7 @@ alwaysApply: true
 
 YAML frontmatter fields: `name`, `description`
 
-- `name` — Use the slash id (e.g. `constellation:status`) so `/constellation:status` resolves.
+- `name` — Use the slash id (e.g. `constellation-status`) so `/constellation-status` resolves.
 - Body — Instructions and `mcp_constellation_code_intel` / `api.*` snippets, same patterns as agents.
 
 ### Skills (`skills/`)
@@ -118,7 +118,7 @@ readonly: true
 ### Adding a slash command
 
 1. Create `commands/<topic>.md`
-2. Add frontmatter: `name` (`constellation:<topic>`), `description`
+2. Add frontmatter: `name` (`constellation-<topic>`), `description`
 3. Document arguments and embed the `mcp_constellation_code_intel` / `api.*` code the model should run
 
 ### Adding a skill
@@ -141,12 +141,12 @@ readonly: true
 No automated tests. Validate manually:
 
 ```
-/constellation:status
-/constellation:diagnose
-/constellation:impact <symbol> <file>
-/constellation:deps <file> [--reverse]
-/constellation:unused [kind]
-/constellation:architecture
+/constellation-status
+/constellation-diagnose
+/constellation-impact <symbol> <file>
+/constellation-deps <file> [--reverse]
+/constellation-unused [kind]
+/constellation-architecture
 ```
 
 ## Environment

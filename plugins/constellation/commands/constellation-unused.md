@@ -1,5 +1,5 @@
 ---
-name: constellation:unused
+name: constellation-unused
 description: Find orphaned/dead code that is exported but never imported
 ---
 

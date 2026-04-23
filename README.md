@@ -16,7 +16,7 @@ While Constellation's MCP server provides raw code intelligence capabilities, th
 
 ### Slash commands
 
-These workflows are defined as markdown in [`commands/`](commands/) (each file has `name` + `description` frontmatter). Invoke them with `/constellation:<name>`:
+These workflows are defined as markdown in [`commands/`](plugins/constellation/commands/) (each file has `name` + `description` frontmatter). Invoke them with `/constellation:<name>`:
 
 | Command | Description |
 |---------|-------------|
@@ -29,7 +29,7 @@ These workflows are defined as markdown in [`commands/`](commands/) (each file h
 
 ### Contextual skills
 
-These live under [`skills/`](skills/) as `SKILL.md` files. Cursor can load them automatically when your question matches the skill description (for example troubleshooting and error codes):
+These live under [`skills/`](plugins/constellation/skills/) as `SKILL.md` files. Cursor can load them automatically when your question matches the skill description (for example troubleshooting and error codes):
 
 | Skill | Triggers when you ask about… |
 |-------|------------------------------|
@@ -54,7 +54,7 @@ Cursor: "Before renaming, let me analyze the potential impact..."
 
 ### Hooks
 
-Configured in [`hooks/hooks.json`](hooks/hooks.json). Cursor matches on the **event** name; there are no separate hook “ids” in the manifest beyond what each entry does:
+Configured in [`hooks/hooks.json`](plugins/constellation/hooks/hooks.json). Cursor matches on the **event** name; there are no separate hook “ids” in the manifest beyond what each entry does:
 
 | Event | Type | Implementation | Behavior |
 |-------|------|----------------|----------|
