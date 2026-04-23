@@ -16,16 +16,16 @@ While Constellation's MCP server provides raw code intelligence capabilities, th
 
 ### Slash commands
 
-These workflows are defined as markdown in [`commands/`](plugins/constellation/commands/) (each file has `name` + `description` frontmatter). Invoke them with `/constellation:<name>`:
+These workflows are defined as markdown in [`commands/`](plugins/constellation/commands/) (each file has `name` + `description` frontmatter). Invoke them with `/constellation-<name>`:
 
 | Command | Description |
 |---------|-------------|
-| `/constellation:status` | Check API connectivity and authentication (`api.ping`) |
-| `/constellation:diagnose` | Broader health check including project metrics (`api.getArchitectureOverview`) |
-| `/constellation:impact <symbol> <file>` | Analyze blast radius before changing a symbol |
-| `/constellation:deps <file> [--reverse]` | Map dependencies or find what depends on a file |
-| `/constellation:unused` | Discover orphaned exports and dead code |
-| `/constellation:architecture` | Get a high-level overview of your codebase structure |
+| `/constellation-status` | Check API connectivity and authentication (`api.ping`) |
+| `/constellation-diagnose` | Broader health check including project metrics (`api.getArchitectureOverview`) |
+| `/constellation-impact <symbol> <file>` | Analyze blast radius before changing a symbol |
+| `/constellation-deps <file> [--reverse]` | Map dependencies or find what depends on a file |
+| `/constellation-unused` | Discover orphaned exports and dead code |
+| `/constellation-architecture` | Get a high-level overview of your codebase structure |
 
 ### Contextual skills
 
