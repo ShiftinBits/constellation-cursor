@@ -1,5 +1,5 @@
 ---
-name: constellation:impact
+name: constellation-impact
 description: Analyze the impact of changing a symbol or file
 ---
 

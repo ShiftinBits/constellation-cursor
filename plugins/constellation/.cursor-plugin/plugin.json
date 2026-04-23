@@ -8,7 +8,7 @@
 	"homepage": "https://constellationdev.io",
 	"repository": "https://github.com/ShiftinBits/constellation-cursor",
 	"license": "AGPL-3.0",
-	"logo": "./plugins/constellation/assets/logo.png",
+	"logo": "assets/logo.png",
 	"keywords": [
 		"code-intelligence",
 		"code-analysis",
@@ -20,10 +20,10 @@
 		"constellation",
 		"shiftinbits"
 	],
-	"rules": "./plugins/constellation/rules",
-	"skills": "./plugins/constellation/skills",
-	"agents": "./plugins/constellation/agents",
-	"commands": "./plugins/constellation/commands",
-	"hooks": "./plugins/constellation/hooks/hooks.json",
-	"mcpServers": "./plugins/constellation/mcp.json"
+	"rules": "./rules",
+	"skills": "./skills",
+	"agents": "./agents",
+	"commands": "./commands",
+	"hooks": "./hooks/hooks.json",
+	"mcpServers": "./mcp.json"
 }

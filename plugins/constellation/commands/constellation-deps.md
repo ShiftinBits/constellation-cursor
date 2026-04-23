@@ -1,5 +1,5 @@
 ---
-name: constellation:deps
+name: constellation-deps
 description: Analyze dependencies for a file or symbol
 ---
 

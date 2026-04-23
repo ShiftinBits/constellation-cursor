@@ -7,8 +7,8 @@
 	"plugins": [
 		{
 			"name": "constellation",
-			"description": "Supercharges Cursor with Constellation, a privacy-first code intelligence platform for deeper codebase understanding and shared code context across teams.",
-			"source": "./",
+			"description": "Supercharge Cursor with Constellation, a privacy-first code intelligence platform for deeper codebase understanding and shared code context across teams.",
+			"source": "./plugins/constellation",
 			"version": "1.0.0",
 			"license": "AGPL-3.0",
 			"repository": "https://github.com/ShiftinBits/constellation-cursor",

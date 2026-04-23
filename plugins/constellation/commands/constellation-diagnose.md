@@ -1,5 +1,5 @@
 ---
-name: constellation:diagnose
+name: constellation-diagnose
 description: Quick health check for Constellation connectivity and authentication
 ---
 

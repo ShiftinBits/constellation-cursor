@@ -31,7 +31,7 @@ Check error.code:
 
 ## MCP Server Issues
 
-**Symptom:** "Failed to reconnect to plugin:constellation:constellation" or tool calls fail entirely.
+**Symptom:** "Failed to reconnect to plugin:constellation-constellation" or tool calls fail entirely.
 
 **Cause:** The MCP server isn't starting or is crashing.
 
@@ -118,7 +118,7 @@ These are typically **not errors** - the item simply wasn't found in the index.
 
 ## Diagnostic Command
 
-Run `/constellation:diagnose` for a quick health check that tests:
+Run `/constellation-diagnose` for a quick health check that tests:
 - MCP server connectivity
 - API authentication
 - Project indexing status

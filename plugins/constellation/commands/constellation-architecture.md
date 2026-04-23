@@ -1,5 +1,5 @@
 ---
-name: constellation:architecture
+name: constellation-architecture
 description: Get a high-level overview of the codebase architecture
 ---
 
