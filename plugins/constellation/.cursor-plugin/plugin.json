@@ -8,7 +8,7 @@
 	"homepage": "https://constellationdev.io",
 	"repository": "https://github.com/ShiftinBits/constellation-cursor",
 	"license": "AGPL-3.0",
-	"logo": "assets/logo.png",
+	"logo": "assets/logo.svg",
 	"keywords": [
 		"code-intelligence",
 		"code-analysis",
