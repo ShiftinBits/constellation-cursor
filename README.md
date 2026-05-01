@@ -8,8 +8,7 @@ While Constellation's MCP server provides raw code intelligence capabilities, th
 |---------|---------|
 | **Slash Commands** | Quick access to common workflows |
 | **Contextual Skills** | Cursor automatically loads relevant knowledge when needed |
-| **Proactive Agents** | Cursor suggests analysis before you make risky changes |
-| **Event Hooks** | Injects code intelligence awareness at session start |
+| **Event Hooks** | Injects code intelligence awareness at session/subagent start and steers search tools toward `code_intel` |
 | **Intelligent Rules** | Persistent guidance to prefer structural analysis over text search |
 
 ## Features
@@ -21,7 +20,7 @@ These workflows are defined as markdown in [`commands/`](plugins/constellation/c
 | Command | Description |
 |---------|-------------|
 | `/constellation-status` | Check API connectivity and authentication (`api.ping`) |
-| `/constellation-diagnose` | Broader health check including project metrics (`api.getArchitectureOverview`) |
+| `/constellation-diagnose` | Quick health check including project metrics (`api.getArchitectureOverview`) |
 | `/constellation-impact <symbol> <file>` | Analyze blast radius before changing a symbol |
 | `/constellation-deps <file> [--reverse]` | Map dependencies or find what depends on a file |
 | `/constellation-unused` | Discover orphaned exports and dead code |
@@ -35,32 +34,16 @@ These live under [`skills/`](plugins/constellation/skills/) as `SKILL.md` files.
 |-------|------------------------------|
 | **constellation-troubleshooting** | Error codes, connectivity, MCP issues, indexing, failed commands |
 
-### Agents
-
-Specialized AI agents for autonomous analysis:
-
-| Agent | Purpose |
-|-------|---------|
-| **source-scout** | Explores and navigates codebase, discovers symbols and architectural patterns |
-| **impact-investigator** | Proactively assesses risk before refactoring, renaming, or deleting code |
-| **dependency-detective** | Detects circular dependencies and unhealthy coupling patterns |
-
-**Example Trigger:**
-```
-You: "Rename AuthService to AuthenticationService"
-Cursor: "Before renaming, let me analyze the potential impact..."
-[Launches impact-investigator agent]
-```
-
 ### Hooks
 
 Configured in [`hooks/hooks.json`](plugins/constellation/hooks/hooks.json). Cursor matches on the **event** name; there are no separate hook “ids” in the manifest beyond what each entry does:
 
 | Event | Type | Implementation | Behavior |
 |-------|------|----------------|----------|
-| `sessionStart` | Command | `./hooks/session-start.sh` | Injects code_intel awareness at the start of a session |
-| `beforeMCPExecution` | Command | `./hooks/allow-constellation-mcp.sh` (matcher: `constellation`) | Runs before Constellation MCP execution (short timeout) |
-| `preToolUse` | Prompt | Inline prompt in `hooks.json` (tool matcher: Grep and Glob) | LLM evaluates those tool calls and may suggest `code_intel` for structural queries instead |
+| `sessionStart` | Command | `node ./hooks/inject.js sessionStart` | Injects code_intel awareness at the start of a session (when `CONSTELLATION_ACCESS_KEY` is set) |
+| `subagentStart` | Command | `node ./hooks/inject.js subagentStart` (matcher: `.*`) | Same guidance as session start, for Task subagents (when `CONSTELLATION_ACCESS_KEY` is set) |
+| `beforeMCPExecution` | Command | `node ./hooks/allow-constellation-mcp.js` (matcher: `constellation`) | Auto-allows `code_intel` MCP calls; defers approval for other tools |
+| `preToolUse` | Command | `node ./hooks/pre-tool-steer.js` (matcher: `Shell`, `Grep`, `Glob`) | Before those tools, nudges toward `code_intel` (Shell only when the command looks like grep/rg/etc.) |
 
 ### Rules
 

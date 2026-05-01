@@ -14,7 +14,7 @@ Find exported code that is never imported or used anywhere in the codebase.
 - If `<kind-filter>` is empty or not provided: call with no filter
 - If `<kind-filter>` contains a kind: pass it as an array element
 
-Call the `mcp_constellation_code_intel` tool:
+Call the `code_intel` tool:
 
 ```javascript
 // <kind-filter> = user's argument (may be empty)

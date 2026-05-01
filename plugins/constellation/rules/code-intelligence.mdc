@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Code Intelligence Mode
 
-You have access to Constellation's `code_intel` tool, which provides structural understanding of the codebase through a graph database. Use it proactively to enhance the quality and safety of your responses.
+You have access to Constellation's `code_intel` tool, which provides precise structural understanding of the codebase via a preindex code graph. Use it proactively to enhance the quality and safety of your responses.
 
 ## Before Modifying Code
 

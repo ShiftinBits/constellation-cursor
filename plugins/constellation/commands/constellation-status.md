@@ -5,7 +5,7 @@ description: Check Constellation API connectivity and authentication status
 
 **IMPORTANT: Do NOT invoke any skills or other commands. Directly call the MCP tool specified below.**
 
-Check the Constellation API connection status by calling the `mcp_constellation_code_intel` tool with this code parameter:
+Check the Constellation API connection status by calling the `code_intel` tool with this code parameter:
 
 ```javascript
 const result = await api.ping();

@@ -9,7 +9,7 @@
 			"name": "constellation",
 			"description": "Upgrade Cursor from text search to code understanding.",
 			"source": "./plugins/constellation",
-			"version": "1.1.0",
+			"version": "1.2.0",
 			"license": "AGPL-3.0",
 			"repository": "https://github.com/ShiftinBits/constellation-cursor",
 			"category": "development",

@@ -15,7 +15,7 @@ If no file path is provided, ask the user what file they want to analyze.
 
 **For dependencies (default, no --reverse flag):**
 
-Call the `mcp_constellation_code_intel` tool with this code parameter:
+Call the `code_intel` tool with this code parameter:
 
 ```javascript
 const [deps, circles] = await Promise.all([
@@ -35,7 +35,7 @@ Present:
 
 **For dependents (with --reverse flag):**
 
-Call the `mcp_constellation_code_intel` tool with this code parameter:
+Call the `code_intel` tool with this code parameter:
 
 ```javascript
 const result = await api.getDependents({ filePath: "<file-path>", depth: 2 });

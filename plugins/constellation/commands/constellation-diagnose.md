@@ -5,7 +5,7 @@ description: Quick health check for Constellation connectivity and authenticatio
 
 **IMPORTANT: Do NOT invoke any skills or other commands. Directly call the MCP tool specified below.**
 
-Run a quick Constellation health check by calling `mcp_constellation_code_intel` with this code:
+Run a quick Constellation health check by calling `code_intel` with this code:
 
 ```javascript
 const result = await api.getArchitectureOverview({ includeMetrics: true });

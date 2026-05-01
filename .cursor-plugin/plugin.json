@@ -1,6 +1,6 @@
 {
 	"name": "constellation",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Upgrade Cursor from text search to code understanding.",
 	"author": {
 		"name": "ShiftinBits Inc"
@@ -8,7 +8,7 @@
 	"homepage": "https://constellationdev.io",
 	"repository": "https://github.com/ShiftinBits/constellation-cursor",
 	"license": "AGPL-3.0",
-	"logo": "./plugins/constellation/assets/logo.png",
+	"logo": "./plugins/constellation/assets/logo.svg",
 	"keywords": [
 		"code-intelligence",
 		"code-analysis",
@@ -22,7 +22,6 @@
 	],
 	"rules": "./plugins/constellation/rules",
 	"skills": "./plugins/constellation/skills",
-	"agents": "./plugins/constellation/agents",
 	"commands": "./plugins/constellation/commands",
 	"hooks": "./plugins/constellation/hooks/hooks.json",
 	"mcpServers": "./plugins/constellation/mcp.json"

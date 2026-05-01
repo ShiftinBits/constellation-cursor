@@ -7,7 +7,7 @@ description: Get a high-level overview of the codebase architecture
 
 Retrieve a high-level architectural overview of the codebase.
 
-Call the `mcp_constellation_code_intel` tool with this code parameter:
+Call the `code_intel` tool with this code parameter:
 
 ```javascript
 const result = await api.getArchitectureOverview({ includeMetrics: true, includeModuleGraph: false });

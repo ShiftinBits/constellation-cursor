@@ -15,7 +15,7 @@ Replace `<symbol-name>` and `<file-path>` with the user's provided values.
 
 If no symbol name is provided, ask the user what symbol they want to analyze.
 
-Call `mcp_constellation_code_intel` with this code parameter:
+Call `code_intel` with this code parameter:
 
 ```javascript
 const result = await api.impactAnalysis({
